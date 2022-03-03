@@ -5,7 +5,7 @@
  */
 package supermarket;
 
-import eventsim.EventSim;
+import eventsim.*;
 
 
 /**
@@ -17,7 +17,7 @@ public class Customer {
     public static final int MAX_PRODUCTS = 500;
     public static final int MIN_PRODUCTS = 1;
 
-    // customer will spend ranom amount of time between these values before
+    // customer will spend random amount of time between these values before
     // going to check out
     public static final int MAX_SHOP_TIME = 50;
     public static final int MIN_SHOP_TIME = 1;
@@ -28,7 +28,7 @@ public class Customer {
     int beginShoppingTime;
     int shoppingDuration;
     int numProducts;
-    int endShoppingTime;
+    int queueTime;
     int queueWaitDuration;
     int checkoutTime;
     int checkoutDuration;
@@ -38,9 +38,9 @@ public class Customer {
     public Customer(SuperMarket shop, int i) {
         this.shop = shop;
         name = "Cust" + i;
-        beginShoppingTime = i;
+        beginShoppingTime = EventSim.nextInt(0, 100);
         numProducts = EventSim.nextInt(MIN_PRODUCTS, MAX_PRODUCTS);
         shoppingDuration = EventSim.nextInt(MIN_SHOP_TIME, MAX_SHOP_TIME);
-        endShoppingTime = beginShoppingTime + shoppingDuration;
+        queueTime = beginShoppingTime + shoppingDuration;
     }
 }

@@ -5,7 +5,7 @@
  */
 package supermarket;
 
-import eventsim.Event;
+import eventsim.*;
 
 
 /**
@@ -25,6 +25,13 @@ public class BeginShoppingEvent extends Event {
 
     @Override
     public Event happen() {
-        return new EndShoppingEvent(customer);
+        customer.queueTime = customer.beginShoppingTime + customer.shoppingDuration;
+        return new QueueEvent(customer);
+    }
+
+    @Override
+    public String toString() {
+        return "BeginShoppingEvent {Started shopping = " + getTime() + ", customer = " + customer.name
+                + ", shopping duration = " + customer.shoppingDuration + '}';
     }
 }

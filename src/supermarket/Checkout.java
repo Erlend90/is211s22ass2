@@ -1,28 +1,42 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package supermarket;
 
+import eventsim.*;
 
-/**
- *
- * @author evenal
- */
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Checkout {
     // amount of time per prouct (to scan barcode)
-    public static final int PROD_DURATION = 2;
+    public static final int PROD_DURATION = 1;
     // amount of time to pay
     public static final int PAY_DURATION = 10;
     //total time for checkout = PAY_DURATION + PROD_DURATION*customer.numProd
 
     SuperMarket shop;
     String name;
+    Queue<Customer> checkoutQueue = new LinkedList<>();
+    int localTime = 0;
 
 
     public Checkout(SuperMarket shop, int i) {
         this.shop = shop;
         this.name = "Checkout" + i;
+    }
+
+    public void addToQueue(Customer c){
+        checkoutQueue.add(c);
+    }
+
+    public void setLocalTime(int localTime) {
+        this.localTime = localTime;
+    }
+
+    public int getLocalTime() {
+        return localTime;
+    }
+
+    public Queue<Customer> getCheckoutQueue() {
+        return checkoutQueue;
     }
 }

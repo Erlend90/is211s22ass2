@@ -5,8 +5,7 @@
  */
 package supermarket;
 
-import eventsim.Event;
-import eventsim.EventSim;
+import eventsim.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,15 +16,15 @@ import java.util.List;
  */
 public class SuperMarket {
 
-    public static void main(String[] arts) {
-        SuperMarket supern = new SuperMarket();
-        supern.startSim();
+    public static void main(String[] args) {
+        SuperMarket superm = new SuperMarket();
+        superm.startSim();
     }
 
     public static final int NUM_CHECKOUTS = 1;
-    public static final int NUM_CUSTOMERS = 4;
+    public static final int NUM_CUSTOMERS = 10;
 
-    Checkout[] checkouts;
+    static Checkout[] checkouts;
     List<Customer> customers;
     List<Event> init;
 
@@ -43,10 +42,13 @@ public class SuperMarket {
         }
     }
 
-
     public void startSim() {
         EventSim sim = EventSim.getInstance();
         sim.setup(init);
         sim.run();
+    }
+
+    public static Checkout[] getCheckouts(){
+        return checkouts;
     }
 }
