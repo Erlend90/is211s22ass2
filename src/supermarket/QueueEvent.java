@@ -32,14 +32,17 @@ public class QueueEvent extends Event {
         //System.out.println(longestQueue);
 
         System.out.println("Checkout: " + checkout.name + ", next available time: " + checkout.getNextAvailTime());
+
         customer.checkoutDuration = customer.numProducts * Checkout.PROD_DURATION + Checkout.PAY_DURATION;
         checkout.addToQueue(customer);
+
         if (checkout.getNextAvailTime()>getTime()){
             customer.checkoutTime = checkout.getNextAvailTime();
         }
         else customer.checkoutTime = getTime();
 
         customer.queueWaitDuration = customer.checkoutTime - customer.queueTime;
+
         System.out.println("Customer " + customer.name + ", queued at " + customer.queueTime + ", checkout time: " + customer.checkoutTime + ", queue wait duration: " + customer.queueWaitDuration);
         checkout.setNextAvailTime(customer.checkoutTime + customer.checkoutDuration);
         System.out.println("Checkout duration: " + customer.checkoutDuration + ", leave time: " + checkout.getNextAvailTime() +"\n");

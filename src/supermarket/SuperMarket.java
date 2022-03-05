@@ -63,6 +63,7 @@ public class SuperMarket {
                     totalQueueSize += c.chosenCheckoutQueue;
                     totalNumProd += c.numProducts;
                 }
+
         avgTimeQueuing = totalQueueTime/customers.size();
         avgQueueSize = totalQueueSize/customers.size();
         avgNumProd = totalNumProd/customers.size();
