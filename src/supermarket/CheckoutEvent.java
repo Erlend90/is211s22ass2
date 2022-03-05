@@ -4,22 +4,24 @@ import eventsim.*;
 
 public class CheckoutEvent extends Event {
     Customer customer;
+    Checkout checkout;
 
-
-    public CheckoutEvent(Customer customer, Checkout checkout) {
-        super(EventSim.getClock());
+    public CheckoutEvent(Checkout checkout, Customer customer) {
+        super(customer.checkoutTime);
+        this.checkout = checkout;
         this.customer = customer;
+        checkout.checkoutQueue.poll();
     }
 
     @Override
     public Event happen() {
-        customer.leaveTime = customer.queueTime + customer.checkoutDuration;
+        customer.leaveTime = customer.checkoutTime + customer.checkoutDuration;
         return new LeaveEvent(customer);
     }
 
     @Override
     public String toString() {
         return "CheckoutEvent {Time = " + getTime() + ", customer = " + customer.name
-                + ", checkout duration = " + customer.checkoutDuration + '}';
+                + ", queue wait = " + customer.queueWaitDuration + ", checkout duration = " + customer.checkoutDuration + '}';
     }
 }

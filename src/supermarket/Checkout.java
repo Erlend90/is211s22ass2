@@ -1,22 +1,20 @@
 
 package supermarket;
 
-import eventsim.*;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class Checkout {
     // amount of time per prouct (to scan barcode)
-    public static final int PROD_DURATION = 1;
+    public static final int PROD_DURATION = 2;
     // amount of time to pay
-    public static final int PAY_DURATION = 10;
+    public static final int PAY_DURATION = 30;
     //total time for checkout = PAY_DURATION + PROD_DURATION*customer.numProd
 
     SuperMarket shop;
     String name;
     Queue<Customer> checkoutQueue = new LinkedList<>();
-    int localTime = 0;
+    int nextAvailTime = 0;
 
 
     public Checkout(SuperMarket shop, int i) {
@@ -28,12 +26,12 @@ public class Checkout {
         checkoutQueue.add(c);
     }
 
-    public void setLocalTime(int localTime) {
-        this.localTime = localTime;
+    public void setNextAvailTime(int nextAvailTime) {
+        this.nextAvailTime = nextAvailTime;
     }
 
-    public int getLocalTime() {
-        return localTime;
+    public int getNextAvailTime() {
+        return nextAvailTime;
     }
 
     public Queue<Customer> getCheckoutQueue() {
